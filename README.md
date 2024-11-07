@@ -2,7 +2,7 @@
 
 This package is inspired by the template tester made by @sivel
 (<https://ansible.sivel.net/test>), which is a great tool, but I thought that it
-would be much more convinient to have something similar in Emacs. So here it is.
+would be much more convenient to have something similar in Emacs. So here it is.
 
 ## Dependencies ##
 
