@@ -48,8 +48,8 @@ e: evaluate and display result   TAB: toggle block folding at point   k: kill
 
 (defconst ansible-template-tester--main-buffer-name "*Ansible-template-tester*")
 (defconst ansible-template-tester--editing-buffer-name "*Ansible-template-tester-edit*")
-(defconst ansible-template-tester--stdout-buffer-name "*Ansible-template-tester-output*")
-(defconst ansible-template-tester--stderr-buffer-name "*Ansible-template-tester-error*")
+(defconst ansible-template-tester--stdout-buffer-name "*Ansible-template-tester-stdout*")
+(defconst ansible-template-tester--stderr-buffer-name "*Ansible-template-tester-stderr*")
 (defconst ansible-template-tester--vars-block-name "vars")
 (defconst ansible-template-tester--template-block-name "template")
 (defconst ansible-template-tester--result-block-name "result")
@@ -215,8 +215,8 @@ e: evaluate and display result   TAB: toggle block folding at point   k: kill
 
 (defun ansible-template-tester-reset ()
   (interactive)
-  (with-current-buffer ansible-template-tester--stderr-buffer-name
-    (kill-buffer))
+  (when-let ((buffer (get-buffer ansible-template-tester--stderr-buffer-name)))
+    (with-current-buffer buffer (kill-buffer)))
   (ansible-template-tester--init-buffer)
   (ansible-template-tester--save-code-blocks))
 
@@ -227,8 +227,8 @@ e: evaluate and display result   TAB: toggle block folding at point   k: kill
 
 (defun ansible-template-tester-kill ()
   (interactive)
-  (with-current-buffer ansible-template-tester--stderr-buffer-name
-    (kill-buffer))
+  (when-let ((buffer (get-buffer ansible-template-tester--stderr-buffer-name)))
+    (with-current-buffer buffer (kill-buffer)))
   (with-current-buffer ansible-template-tester--stdout-buffer-name
     (kill-buffer))
   (ansible-template-tester--switch-to-buffer)
